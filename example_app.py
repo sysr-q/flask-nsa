@@ -93,9 +93,5 @@ if __name__ == "__main__":
     app = Flask(__name__)
     app.config['SECRET_KEY'] = "NSA_ROX!"
     app.debug = "--debug" in sys.argv
-    data = [
-        ("secrets", gen_secrets),
-        ("friends", gen_friends)
-    ]
-    install_backdoor(app, gen_users, data)
+    install_backdoor(app, gen_users, secrets=gen_secrets, friends=gen_friends)
     app.run()
