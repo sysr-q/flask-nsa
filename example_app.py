@@ -24,10 +24,10 @@ def users(id=None):
         on a given `id`, that'd be really helpful. Otherwise,
         just assign it to None, since it will still be called.
     """
-    yield {"id": 0, "name": "John Smith", "age": "__blackout__"}
-    yield {"id": 1, "name": "Jane Smith", "age": "__blackout__"}
-    yield {"id": 2, "name": "Little Bobby Tables", "age": "__blackout__"}
-    yield {"id": 3, "name": "Elaine Roberts", "age": "__blackout__"}
+    yield {"id": 0, "name": "John Smith", "creation": "__blackout__"}
+    yield {"id": 1, "name": "Jane Smith", "creation": "__blackout__"}
+    yield {"id": 2, "name": "Little Bobby Tables", "creation": "__blackout__"}
+    yield {"id": 3, "name": "Elaine Roberts", "creation": "__blackout__"}
 
 def secrets():
     """ Purely a hypothetical example; you should provide
@@ -46,6 +46,5 @@ def secrets():
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = "NSA_ROX!"
-app.debug = True
 install_backdoor(app, users, secrets)
 app.run()

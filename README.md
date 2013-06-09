@@ -2,7 +2,8 @@ Flask-NSA
 =========
 ![](nsa-eagle.png)
 
-Let the NSA protect the freedom of the users of your Flask app. Feel like ~~destroying all freedom online~~ fighting terror? I sure do!
+Let the NSA protect the freedom of the users of your Flask app. Feel like ~~destroying all freedom online~~ fighting terror? I sure do!  
+Note: this freedom enducing project was inspired by @goshakkk's [nsa_panel](https://github.com/goshakkk/nsa_panel) for Ruby on Rails.
 
 Example
 =======
@@ -63,6 +64,19 @@ Send your users the following ~~lie~~ factual statement:
 > all cherish.
 
 Couldn't be easier.
+
+What it looks like
+==================
+
+![Ensure they've got a warrant](0-warrant-required.png)
+
+![View all users](1-users.png)
+
+![User related details](2-user-info.png)
+
+![Look at all of these secrets](3-user-secrets.png)
+
+![Here's your secret](4-user-secret.png)
 
 Inclusion in PyPi projects
 ==========================
