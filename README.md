@@ -26,10 +26,10 @@ Import `install_backdoor` into your app:
 from flask.ext.nsa import install_backdoor
 ```
 
-Pass `install_backdoor` your app, as well as a generator for your user table and an iterable of tuples.
+Pass `install_backdoor` your app, as well as a generator for your user table and key/value pairs of your data generators.
 It's sort of hard to explain, and much easier to see, so look at `example_app.py` at the `gen_*` methods to get an idea.  
 ```python
-install_backdoor(app, users, [("secrets", gen_secrets), ("friends", gen_friends)])
+install_backdoor(app, users, secrets=gen_secrets, friends=gen_friends)
 ```
 
 Send your users the following ~~lie~~ factual statement:
