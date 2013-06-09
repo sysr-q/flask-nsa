@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+
+{% block title %}Warrant required{% endblock %}
+
+{% block header %}
+{{ super() }}
+<style>
+h2.button {
+    padding: 5px;
+    text-align: center;
+    font-weight: normal;
+}
+h2 a {
+    display: block;
+    color: #fff;
+}
+</style>
+<script>
+    $(function () {
+        $('#no-warrant').click(function () {
+            alert('Wrong answer, officer.');
+            return false;
+        });
+    });
+</script>
+{% endblock %}
+
+{% block content %}
+<h2>Have you received the appropriate warrant for this access?</h2>
+
+<h2 id="yes-warrant" class="button green">
+    <a href="?yes">
+        I have received a FISA warrant
+    </a>
+</h2>
+<h2 id="no-warrant" class="button red">
+    <a href="">
+        I have not received a FISA warrant
+    </a>
+</h2>
+{% endblock %}

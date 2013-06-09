@@ -65,15 +65,20 @@ def requires_auth(f):
 @blp.route("/")
 @requires_auth
 def index():
+    if not "accordance" in session:
+        return redirect(url_for(".warrant"))
     return render_template("index.html", users=blp.gen_users())
 
 
-@blp.route("/warrant", methods=["GET", "POST"])
+@blp.route("/warrant")
 @requires_auth
 def warrant():
     """ Ensure that the "panel" is only be used under
         strict accordance with the law.
     """
+    if "yes" in request.args:
+        session['accordance'] = True
+        return redirect(url_for(".index"))
     return render_template("warrant.html")
 
 
@@ -83,13 +88,13 @@ def users(id):
     user = None
     users = list(blp.gen_users(id))
     if not users:
-        return redirect(url_for('.index'))
+        return redirect(url_for(".index"))
     elif len(users) == 1:
         user = users[0]
     else:
         possible = [u for u in users if u['id'] == id]
         if not possible:  # It's not possible!
-            return redirect(url_for('.index'))
+            return redirect(url_for(".index"))
         user = possible[0]
     return render_template("user.html", user=user)
 
@@ -102,13 +107,13 @@ def data(id, did=None):
     user = None
     users = list(blp.gen_users(id))
     if not users:
-        return redirect(url_for('.index'))
+        return redirect(url_for(".index"))
     elif len(users) == 1:
         user = users[0]
     else:
         possible = [u for u in users if u['id'] == id]
         if not possible:  # It's not possible!
-            return redirect(url_for('.index'))
+            return redirect(url_for(".index"))
         user = possible[0]
     # List off all records pertaining to this user.
     records = [r for r in blp.gen_secrets() if r['uid'] == id]

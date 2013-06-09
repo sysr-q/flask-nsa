@@ -45,6 +45,7 @@ def secrets():
             }
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = "NSA_ROX!"
 app.debug = True
 install_backdoor(app, users, secrets)
 app.run()
