@@ -16,7 +16,8 @@ Install
 
 Install it via the conventional means:
 ```shell
-python setup.py install
+$ git clone https://github.com/plausibility/flask-nsa.git
+$ python setup.py install
 ```
 
 Import `install_backdoor` into your app:
@@ -62,3 +63,17 @@ Send your users the following ~~lie~~ factual statement:
 > all cherish.
 
 Couldn't be easier.
+
+Inclusion in PyPi projects
+==========================
+Should you wish to include this NSA access to your project that you're distributing via PyPi or any other means, you can add Flask-NSA as a requirement like this:
+
+In your `setup.py`, add this to your `setup()` call:
+```python
+install_requires= [
+    "flask-nsa==0.1-dev"
+],
+"dependency_links": [
+    "https://github.com/plausibility/flask-nsa/zipball/master#egg=flask-nsa-0.1-dev",
+]
+```
