@@ -32,7 +32,7 @@
         <th span="col">Value</th>
     </thead>
     <tbody>
-        <tr><td>Id</td><td>{{ user.id }}</td></tr>
+        <tr><td>ID</td><td>{{ user.id }}</td></tr>
         <tr><td>Name</td><td>{{ user.name }}</td></tr>
         {% for k, v in user.items() %}
         {% if k not in ("id", "name") %}
@@ -51,6 +51,6 @@
 
 <h2>Related data</h2>
 <ul>
-    <li><a href="{{ url_for('.secrets', id=user.id) }}">Secrets</a></li>
+    <li><a href="{{ url_for('.data', id=user.id, name='secrets') }}">Secrets</a></li>
 </ul>
 {% endblock %}

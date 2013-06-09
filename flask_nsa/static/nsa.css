@@ -17,7 +17,9 @@ body {
     padding-bottom: 10px;
     padding-top: 10px;
 }
-#user-data a.button {
+
+/* Everyone Approved Lack-Of-Underlined-Links */
+a {
     text-decoration: none;
 }
 
