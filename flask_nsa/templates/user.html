@@ -1,0 +1,56 @@
+{% extends "layout.html" %}
+
+{% block title %}{{ user.name }}{% endblock %}
+
+{% block head %}
+{{ super() }}
+<style>
+#name {
+    display: inline-block;
+    margin-bottom: 5px;
+}
+#number {
+    color: #999;
+}
+#number:before {
+    content: "#";
+}
+.blackout {
+    color: #000;
+    background-color: #000;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<h1 id="name">{{ user.name }}</h1> <span id="number">{{ user.id }}</span>
+
+<h2>Attributes</h2>
+<table id="user-data">
+    <thead>
+        <th span="col">Key</th>
+        <th span="col">Value</th>
+    </thead>
+    <tbody>
+        <tr><td>Id</td><td>{{ user.id }}</td></tr>
+        <tr><td>Name</td><td>{{ user.name }}</td></tr>
+        {% for k, v in user.items() %}
+        {% if k not in ("id", "name") %}
+        <tr>
+            <td>{{ k.capitalize() }}</td>
+            {% if v == "__blackout__" %}
+            <td><span class="blackout">{{ "_" * 20 }}</span></td>
+            {% else %}
+            <td>{{ v }}</td>
+            {% endif %}
+        </tr>
+        {% endif %}
+        {% endfor %}
+    </tbody>
+</table>
+
+<h2>Related data</h2>
+<ul>
+    <li><a href="{{ url_for('.secrets', id=user.id) }}">Secrets</a></li>
+</ul>
+{% endblock %}

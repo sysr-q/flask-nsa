@@ -65,13 +65,36 @@ def requires_auth(f):
 @blp.route("/")
 @requires_auth
 def index():
-    return render_template("index.html")
+    return render_template("index.html", users=blp.gen_users())
 
 
 @blp.route("/warrant", methods=["GET", "POST"])
 @requires_auth
 def warrant():
-    """ Ensure that the backdoor is only be used under
+    """ Ensure that the "panel" is only be used under
         strict accordance with the law.
     """
     return render_template("warrant.html")
+
+
+@blp.route("/users/<int:id>")
+@requires_auth
+def users(id):
+    user = None
+    users = list(blp.gen_users(id))
+    if not users:
+        return redirect(url_for('.index'))
+    elif len(users) == 1:
+        user = users[0]
+    else:
+        possible = [u for u in users if u['id'] == id]
+        if not possible:  # It's not possible!
+            return redirect(url_for('.index'))
+        user = possible[0]
+    return render_template("user.html", user=user)
+
+
+@blp.route("/users/<int:id>/data")
+@requires_auth
+def data(id):
+    return ""

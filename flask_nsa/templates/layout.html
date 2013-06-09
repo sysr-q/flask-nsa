@@ -1,17 +1,39 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     {% block head %}
-    <title>NSA Backdoor :: {% block title %}{% endblock %}</title>
+    <meta charset="utf-8" />
+    <title>NSA Panel</title> <!-- {% block title %}{% endblock %} -->
     <link rel="stylesheet" href="{{ url_for('.static', filename='960.css') }}"/>
     <link rel="stylesheet" href="{{ url_for('.static', filename='nsa.css') }}"/>
+    <style>
+        /* Filthy hack or artistic genius? You decide. */
+        #tiny-eagle {
+            width: 100%;
+            height: 118px;
+            text-align: center;
+            background-image: url('{{ url_for(".static", filename="nsa-eagle-tiny.png") }}');
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+    </style>
     {% endblock %}
 </head>
 <body>
     <div class="container_12">
         <div class="grid_12">
+            <section id="main-heading" class="transition">
+                <nav>
+                    <div class="f-left">
+                        <span class="title">NSA Indirect Access Panel</span>
+                        <a href="{{ url_for('.index') }}" class="transition">Users</a>
+                        {% block header %}{% endblock %}
+                    </div>
+                </nav>
+            </section>
             {% block content %}
             {% endblock %}
+            <div id="tiny-eagle"></div>
         </div>
     </div>
 </body>

@@ -1,0 +1,129 @@
+body {
+    font-family: sans-serif;
+}
+
+/* NSA Approved Table Display */
+#user-data {
+    width: 100%;
+    border-collapse: collapse;
+}
+#user-data th {
+    text-align: left;
+}
+#user-data tr {
+    border-bottom: 1px solid #ccc;
+}
+#user-data td {
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+#user-data a.button {
+    text-decoration: none;
+}
+
+/* NSA Approved Buttons */
+.button {
+    padding: 2px 4px;
+    background-color: #4479BA;
+    color: #FFF;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    border: none;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.4);
+    -webkit-transition-duration: 0.2s;
+    -moz-transition-duration: 0.2s;
+    transition-duration: 0.2s;
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
+}
+
+.button:hover {
+    background-color: #356094;
+    text-decoration: none;
+}
+
+.button:active {
+    box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
+    background-color: #2E5481;
+}
+
+.button.green {
+    background-color: #5bb75b;
+    border-color: #51a351;
+}
+
+.button.green:hover, 
+.button.green:active {
+    background-color: #51a351;
+}
+
+.button.red {
+    background-color: #da4f49;
+    border-color: #bd362f;
+}
+
+.button.red:hover,
+.button.red:active {
+    background-color: #bd362f;
+}
+
+.button.orange {
+    background-color: #faa732;
+    border-color: #f89406;
+}
+
+.button.orange:hover,
+.button.orange:active {
+    background-color: #f89406;
+}
+
+.button.cyan {
+    background-color: #49afcd;
+    border-color: #2f96b4;
+}
+
+.button.cyan:hover,
+.button.cyan:active {
+    background-color: #2f96b4;
+}
+
+/* NSA Panel header bar */
+#main-heading {
+    width: 100%;
+
+    background-color: #143352;
+    height: 40px;
+    z-index: 5;
+    border-radius: 5px;
+}
+
+nav {
+    padding: 0 5px;
+    margin: 0 auto;
+    display: block;
+    padding-left: 10px;
+    padding-right: 10px;
+
+    font-size: 125%;
+    font-family: sans-serif, inherit;
+    font-weight: normal;
+}
+
+nav a, nav span {
+    display: inline-block;
+    line-height: 40px;
+    color: #FFFFFF !important;
+    padding: 0 10px;
+    text-decoration: none;
+}
+
+nav a:hover {
+    background-color: #194067;
+}
+
+nav .title {
+    font-weight: bold;
+}
