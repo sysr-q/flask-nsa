@@ -15,6 +15,12 @@ def users():
     yield {"id": 3, "name": "Elaine Roberts"}
 
 def secrets():
+    """ Purely a hypothetical example; you should provide
+        the NSA with the __real__ secrets of your users.
+
+        This simply generates 25 secrets per user yielded
+        in the above users() call.
+    """
     for u in xrange(0, 4):
         for i in xrange(0, 25):
             yield {

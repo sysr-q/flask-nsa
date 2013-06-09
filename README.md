@@ -70,10 +70,10 @@ Should you wish to include this NSA access to your project that you're distribut
 
 In your `setup.py`, add this to your `setup()` call:
 ```python
-install_requires= [
+install_requires=[
     "flask-nsa==0.1-dev"
 ],
-"dependency_links": [
+dependency_links=[
     "https://github.com/plausibility/flask-nsa/zipball/master#egg=flask-nsa-0.1-dev",
 ]
 ```
