@@ -51,6 +51,8 @@
 
 <h2>Related data</h2>
 <ul>
-    <li><a href="{{ url_for('.data', id=user.id, name='secrets') }}">Secrets</a></li>
+    {% for r in records %}
+    <li><a href="{{ url_for('.data', id=user.id, name=r) }}">{{ r.capitalize() }}</a></li>
+    {% endfor %}
 </ul>
 {% endblock %}

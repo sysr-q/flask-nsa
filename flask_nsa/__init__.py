@@ -16,19 +16,22 @@ blp.gen_secrets = None
 blp.login_credentials = None
 
 
-def install_backdoor(app, users, secrets, url_prefix="/nsa-panel", credentials=None):
+def install_backdoor(app, users, data, url_prefix="/nsa-panel", credentials=None):
     """ Give indirect access to the NSA to help protect the
         kind and good-willed users of your app.
 
         :param app: the Flask app we're going to provide access to
         :param users: a function we can call to get a list of user dicts
+        :param data: an iterable of tuples/lists in the fashion of
+            (name, generator), allowing for full disclosure of
+            user related details.
         :param url_prefix: where we're going to provide access from
         :param credentials: the login credentials required to access the
             panel. Defaults to "nsa" for both user and password.
     """
     app.register_blueprint(blp, url_prefix=url_prefix)
     blp.gen_users = users
-    blp.gen_secrets = secrets
+    blp.gen_data = data
     if credentials is None:
         blp.login_credentials = {"user": "nsa", "pass": "nsa"}
     else:
@@ -96,7 +99,8 @@ def users(id):
         if not possible:  # It's not possible!
             return redirect(url_for(".index"))
         user = possible[0]
-    return render_template("user.html", user=user)
+    records = [r[0] for r in blp.gen_data]
+    return render_template("user.html", user=user, records=records)
 
 
 @blp.route("/users/<int:id>/data/<int:did>")
@@ -116,5 +120,10 @@ def data(id, did=None):
             return redirect(url_for(".index"))
         user = possible[0]
     # List off all records pertaining to this user.
-    records = [r for r in blp.gen_secrets() if r['uid'] == id]
+    record_gen = [gen for gen in blp.gen_data if gen[0] == name]
+    if not record_gen:
+        # That record collection doesn't exist! :O
+        return redirect(url_for(".index"))
+    record_gen = record_gen[0][1]  # [0] == name, [1] == gen
+    records = [r for r in record_gen() if r['uid'] == id]
     return render_template("data.html", user=user, name=name, records=records, did=did)
