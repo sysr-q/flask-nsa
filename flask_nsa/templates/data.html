@@ -1,0 +1,53 @@
+{% extends "layout.html" %}
+
+{% block title %}{{ user.name }}'s {{ name }}{% endblock %}
+
+{% block head %}
+{{ super() }}
+<style>
+#name {
+    display: inline-block;
+    margin-bottom: 5px;
+}
+#number {
+    color: #999;
+}
+#number:before {
+    content: "#";
+}
+.blackout {
+    color: #000;
+    background-color: #000;
+}
+img.black {
+    max-width: 100%;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+{% if did != none %}
+<h1 id="name">{{ user.name }}'s {{ name }} #{{ did + 1 }}</h1>
+<img class="black" src="{{ url_for('.static', filename='fuck_you.jpg') }}">
+{% else %}
+<h1 id="name">{{ user.name }}'s {{ name }}</h1> <span id="number">{{ user.id }}</span>
+<table id="user-data">
+    <thead>
+        <th span="col">ID</th>
+        <th span="col">Actions</th>
+    </thead>
+    <tbody>
+        {% for k in records %}
+        <tr>
+            <td>{{ k.id + 1 }}</td>
+            <td>
+                <a class="button" href="{{ url_for('.data', id=user.id, did=k.id, name=name) }}">
+                    I found this suspicious
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endif %}
+{% endblock %}

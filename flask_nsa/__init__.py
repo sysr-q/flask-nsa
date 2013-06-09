@@ -94,7 +94,22 @@ def users(id):
     return render_template("user.html", user=user)
 
 
+@blp.route("/users/<int:id>/data/<int:did>")
 @blp.route("/users/<int:id>/data")
 @requires_auth
-def data(id):
-    return ""
+def data(id, did=None):
+    name = request.args.get("name", "")
+    user = None
+    users = list(blp.gen_users(id))
+    if not users:
+        return redirect(url_for('.index'))
+    elif len(users) == 1:
+        user = users[0]
+    else:
+        possible = [u for u in users if u['id'] == id]
+        if not possible:  # It's not possible!
+            return redirect(url_for('.index'))
+        user = possible[0]
+    # List off all records pertaining to this user.
+    records = [r for r in blp.gen_secrets() if r['uid'] == id]
+    return render_template("data.html", user=user, name=name, records=records, did=did)
