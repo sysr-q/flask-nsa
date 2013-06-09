@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% block head %}
+    <title>NSA Backdoor :: {% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('.static', filename='960.css') }}"/>
+    <link rel="stylesheet" href="{{ url_for('.static', filename='nsa.css') }}"/>
+    {% endblock %}
+</head>
+<body>
+    <div class="container_12">
+        <div class="grid_12">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </div>
+</body>
+</html>
