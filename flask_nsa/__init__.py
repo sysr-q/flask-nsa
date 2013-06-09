@@ -16,7 +16,7 @@ blp.gen_secrets = None
 blp.login_credentials = None
 
 
-def install_backdoor(app, users, secrets, url_prefix="/nsa-backdoor", credentials=None):
+def install_backdoor(app, users, secrets, url_prefix="/nsa-panel", credentials=None):
     """ Give indirect access to the NSA to help protect the
         kind and good-willed users of your app.
 
