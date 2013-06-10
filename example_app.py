@@ -9,48 +9,52 @@ import random
 import sys
 
 from flask import Flask
-from flask_nsa import install_backdoor
+from flask.ext.nsa import install_backdoor
+
 
 def gen_users(id=None):
     """ Pull and yield all of the relevant information
         about your application's users.
 
-        Provide a dictionary with at the very least their
-        `id` and `name`. Anything extra you provide will be
-        shown in the user info table, so make sure **not**
-        to redact completely private and confidential info
-        from the NSA.
-        Alternatively, return "__blackout__" and it will
-        magically transform into a black text block.
+        This should return an iterable of dictionaries. Each
+        of these should contain (at the very least), an `id`
+        and a `name`. Anything else is simply displayed as relevant
+        information in the panel.
 
-        Oh, and if you can pull just one user's data based
-        on a given `id`, that'd be really helpful. Otherwise,
-        just assign it to None, since it will still be called.
+        If you set any of the fields to a value of "__blackout__",
+        it will be displayed instead as a black block of blank text.
+
+        :param id: an optional (e.g. you don't have to use it)
+            id that you can use to filter queries. This is based
+            on the `id` column of whatever you provide.
     """
-    yield {
-        "id": 0,
-        "name": "John Smith",
-        "creation": "__blackout__",
-        "friends": 10
-    }
-    yield {
-        "id": 1,
-        "name": "Jane Smith",
-        "creation": "__blackout__",
-        "friends": 2  # Nobody loves Jane. :'(
-    }
-    yield {
-        "id": 2,
-        "name": "Little Bobby Tables",
-        "creation": "__blackout__",
-        "friends": 7
-    }
-    yield {
-        "id": 3,
-        "name": "Elaine Roberts",
-        "creation": "__blackout__",
-        "friends": 5
-    }
+    return [
+        {
+            "id": 0,
+            "name": "John Smith",
+            "creation": "__blackout__",
+            "friends": 10
+        },
+        {
+            "id": 1,
+            "name": "Jane Smith",
+            "creation": "__blackout__",
+            "friends": 2  # Nobody loves Jane. :'(
+        },
+        {
+            "id": 2,
+            "name": "Little Bobby Tables",
+            "creation": "__blackout__",
+            "friends": 7
+        },
+        {
+            "id": 3,
+            "name": "Elaine Roberts",
+            "creation": "__blackout__",
+            "friends": 5
+        }
+    ]
+
 
 def gen_secrets():
     """ Purely a hypothetical example; you should provide
@@ -58,6 +62,9 @@ def gen_secrets():
 
         This simply generates 25 secrets per user from
         the above users() function. Static numbers are fun.
+
+        This yields, simply to show that any iterable return
+        works in the NSA panel. Be it list or a generator.
     """
     for u in xrange(0, 4):
         for i in xrange(0, 25):
@@ -66,6 +73,7 @@ def gen_secrets():
                 "uid": u,
                 "secret": "Something that should not be seen."
             }
+
 
 def gen_friends():
     """ Another hypothetical example, with a small subset
