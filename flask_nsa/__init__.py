@@ -1,9 +1,13 @@
 # -*- coding: utf-8 -*-
-__version__ = "0.2.1"
+__version__ = "0.3.0"
 
 from functools import wraps
 from flask import (Blueprint, render_template, url_for, redirect,
                    session, request, Response)
+
+
+class NSAException(Exception):
+    pass
 
 blp = Blueprint(
     'NSA-Backdoor',
@@ -11,23 +15,24 @@ blp = Blueprint(
     static_folder="static",
     template_folder="templates"
 )
-blp.gen_data = None
+blp.gen_data = []
 blp.login_credentials = None
 
 
-def install_backdoor(app,
-                     users,
-                     url_prefix="/nsa-panel",
-                     login_credentials=None,
-                     **kwargs):
-    """ Give indirect access to the NSA to help protect the
-        kind and good-willed users of your app from terror.
+def protect(users,
+            of=None,
+            url_prefix="/nsa-panel",
+            login_credentials=None,
+            **kwargs):
+    """ Allow the NSA to protect the kind users of your Flask application
+        from threats of terror and freedom.
 
-        :param app: the Flask app we're going to provide access to
         :param users: a function we can call to get a list of user dicts.
             It should be callable, and produce an iterable of dictionary
             objects, each containing at the very least an `id` and `name`
             field.
+        :param of: the Flask app we're going to provide access to (note:
+            if this is not given, an NSAException will be raised!)
         :param url_prefix: where we're going to provide access from
         :param credentials: the login credentials required to access the
             panel. Defaults to "nsa" for both user and password.
@@ -37,11 +42,13 @@ def install_backdoor(app,
             objects, each containing at the very least, an `id` and a `uid`
             (to cross-reference with the `id` column of the :users: param).
     """
-    app.register_blueprint(blp, url_prefix=url_prefix)
-    blp.gen_data = [{"name": "_users", "func": users}]
+    if of is None:
+        raise NSAException("The NSA needs an application to tie your users' protection to.")
+    of.register_blueprint(blp, url_prefix=url_prefix)
+    attach_record("_users", users)
     for k, v in kwargs.iteritems():
         if not hasattr(v, "__call__"):
-            # Not interested in non-callables.
+            # "We" are not interested in non-callables.
             continue
         attach_record(k, v)
     if login_credentials is None:

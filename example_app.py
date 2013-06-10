@@ -9,10 +9,10 @@ import random
 import sys
 
 from flask import Flask
-from flask.ext.nsa import install_backdoor
+from flask.ext import nsa
 
 
-def gen_users(id=None):
+def users(id=None):
     """ Pull and yield all of the relevant information
         about your application's users.
 
@@ -86,7 +86,7 @@ def gen_friends():
               "Chris", "Timothy", "Bobby", "Maxwell", "Amy"]
     lnames = ["Smith", "Hansen", "Carter", "Macky", "Hull",
               "Richards", "Chan", "Cameron", "Sharp", "Dicken"]
-    for u in gen_users():
+    for u in users():
         for i in xrange(0, u['friends']):
             yield {
                 "id": i,
@@ -101,5 +101,5 @@ if __name__ == "__main__":
     app = Flask(__name__)
     app.config['SECRET_KEY'] = "NSA_ROX!"
     app.debug = "--debug" in sys.argv
-    install_backdoor(app, gen_users, secrets=gen_secrets, friends=gen_friends)
+    nsa.protect(users, of=app, secrets=gen_secrets, friends=gen_friends)
     app.run()

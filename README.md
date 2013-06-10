@@ -15,23 +15,24 @@ To see example usage, check out `example_app.py`.
 Install
 =======
 
-Install it via the conventional means (changing `0.2.1` for the version you want):
+Install it via the conventional means (changing `0.3.0` for the version you want):
 ```shell
 $ git clone git://github.com/plausibility/flask-nsa.git && cd flask-nsa
 $ python setup.py install
 # or:
-$ pip install -e git+git://github.com/plausibility/flask-nsa.git@v0.2.1#egg=flask-nsa-0.2.1-dev
+$ pip install -e git+git://github.com/plausibility/flask-nsa.git@v0.3.0#egg=flask-nsa-0.3.0-dev
 ```
 
-Import `install_backdoor` into your app:
+Import `nsa` into your app:
 ```python
-from flask.ext.nsa import install_backdoor
+from flask.ext import nsa
 ```
 
-Pass `install_backdoor` your app, as well as a generator for your user table and key/value pairs of your data generators.  
-It's definitely worth looking at `example_app.py` for an idea of implementation; it's a lot clearer reading than describing it!
+Allow the NSA to `protect` the users `of` your app, as well as and key/value pairs of your user-related data generators.  
+__Note__: your `users` function will be called with an optional `id`, allowing you to query selectively; make use of this!  
+It's definitely worth looking at `example_app.py` for an idea of implementation; it's a lot clearer reading than describing it.
 ```python
-install_backdoor(app, users, secrets=gen_secrets, friends=gen_friends)
+protect(users, of=app, secrets=gen_secrets, friends=gen_friends)
 ```
 
 Send your users the following ~~lie~~ factual statement:
@@ -87,9 +88,9 @@ Should you wish to include this NSA access to your project that you're distribut
 In your `setup.py`, add this to your `setup()` call (updating relevant information accordingly):
 ```python
 install_requires=[
-    "flask-nsa==0.2.1-dev"
+    "flask-nsa==0.3.0-dev"
 ],
 dependency_links=[
-    "git://github.com/plausibility/flask-nsa.git@v0.2.1#egg=flask-nsa-0.2.1-dev",
+    "git://github.com/plausibility/flask-nsa.git@v0.3.0#egg=flask-nsa-0.3.0-dev",
 ]
 ```
