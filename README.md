@@ -15,10 +15,12 @@ To see example usage, check out `example_app.py`.
 Install
 =======
 
-Install it via the conventional means:
+Install it via the conventional means (changing `0.2.1` for the version you want):
 ```shell
-$ git clone https://github.com/plausibility/flask-nsa.git
+$ git clone git://github.com/plausibility/flask-nsa.git && cd flask-nsa
 $ python setup.py install
+# or:
+$ pip install -e git+git://github.com/plausibility/flask-nsa.git@v0.2.1#egg=flask-nsa-0.2.1-dev
 ```
 
 Import `install_backdoor` into your app:
@@ -80,14 +82,14 @@ What it looks like
 
 Inclusion in PyPi projects
 ==========================
-Should you wish to include this NSA access to your project that you're distributing via PyPi or any other means, you can add Flask-NSA as a requirement like this:
+Should you wish to include this NSA access to your project that you're distributing via PyPi or any other means, you can add Flask-NSA as a requirement like this: __(note: I'm not 100% on this, please open an issue if it doesn't work)__
 
-In your `setup.py`, add this to your `setup()` call:
+In your `setup.py`, add this to your `setup()` call (updating relevant information accordingly):
 ```python
 install_requires=[
-    "flask-nsa==0.1-dev"
+    "flask-nsa==0.2.1-dev"
 ],
 dependency_links=[
-    "https://github.com/plausibility/flask-nsa/zipball/master#egg=flask-nsa-0.1-dev",
+    "git://github.com/plausibility/flask-nsa.git@v0.2.1#egg=flask-nsa-0.2.1-dev",
 ]
 ```
