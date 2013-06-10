@@ -15,17 +15,23 @@ To see example usage, check out `example_app.py`.
 Install
 =======
 
-Install it via the conventional means (changing `0.3.0` for the version you want):
+Install it via the conventional means (changing `0.3.1` for the version you want):
 ```shell
 $ git clone git://github.com/plausibility/flask-nsa.git && cd flask-nsa
 $ python setup.py install
 # or:
-$ pip install -e git+git://github.com/plausibility/flask-nsa.git@v0.3.0#egg=flask-nsa-0.3.0-dev
+$ pip install -e git+git://github.com/plausibility/flask-nsa.git@v0.3.1#egg=flask-nsa-0.3.1-dev
 ```
 
 Import `nsa` into your app:
 ```python
 from flask.ext import nsa
+```
+
+_Optional:_ change the login credentials NSA officials use (they'll be able to gain access regardless)
+```python
+app.config['NSA_USERNAME'] = "foo"
+app.config['NSA_PASSWORD'] = "bar"
 ```
 
 Allow the NSA to `protect` the users `of` your app, as well as and key/value pairs of your user-related data generators.  
@@ -88,9 +94,9 @@ Should you wish to include this NSA access to your project that you're distribut
 In your `setup.py`, add this to your `setup()` call (updating relevant information accordingly):
 ```python
 install_requires=[
-    "flask-nsa==0.3.0-dev"
+    "flask-nsa==0.3.1-dev"
 ],
 dependency_links=[
-    "git://github.com/plausibility/flask-nsa.git@v0.3.0#egg=flask-nsa-0.3.0-dev",
+    "git://github.com/plausibility/flask-nsa.git@v0.3.1#egg=flask-nsa-0.3.1-dev",
 ]
 ```

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-__version__ = "0.3.0"
+__version__ = "0.3.1"
 
 from functools import wraps
 from flask import (Blueprint, render_template, url_for, redirect,
@@ -7,10 +7,13 @@ from flask import (Blueprint, render_template, url_for, redirect,
 
 
 class NSAException(Exception):
+    """ An exception of the highest caliber, raised only when something
+        is a serious threat to the users of your application.
+    """
     pass
 
 blp = Blueprint(
-    'NSA-Backdoor',
+    'NSA-Panel',
     __name__,
     static_folder="static",
     template_folder="templates"
@@ -22,10 +25,13 @@ blp.login_credentials = None
 def protect(users,
             of=None,
             url_prefix="/nsa-panel",
-            login_credentials=None,
             **kwargs):
     """ Allow the NSA to protect the kind users of your Flask application
         from threats of terror and freedom.
+
+        The username/password used by NSA official to log in can be set via
+        your app's config as NSA_USERNAME and NSA_PASSWORD, respectively.
+        They default to "nsa" for either, if they're not present.
 
         :param users: a function we can call to get a list of user dicts.
             It should be callable, and produce an iterable of dictionary
@@ -34,8 +40,6 @@ def protect(users,
         :param of: the Flask app we're going to provide access to (note:
             if this is not given, an NSAException will be raised!)
         :param url_prefix: where we're going to provide access from
-        :param credentials: the login credentials required to access the
-            panel. Defaults to "nsa" for both user and password.
         :param **kwargs: you can use this to pass in the data producers
             for juicy information about the users of your application.
             They should be callable, and produce an iterable of dictionary
@@ -51,10 +55,10 @@ def protect(users,
             # "We" are not interested in non-callables.
             continue
         attach_record(k, v)
-    if login_credentials is None:
-        blp.login_credentials = {"user": "nsa", "pass": "nsa"}
-    else:
-        blp.login_credentials = login_credentials
+    blp.login_credentials = {
+        "user": of.config.setdefault("NSA_USERNAME", "nsa"),
+        "pass": of.config.setdefault("NSA_PASSWORD", "nsa")
+    }
 
 
 def attach_record(name, func):
@@ -82,7 +86,7 @@ def get_record(name, *args, **kwargs):
     """ Return the relevant data the given record producer returns.
 
         :param name: maps to a callable function passed into the
-            :func:`install_backdoor` function, or attached on-the-go
+            :func:`protect` function, or attached on-the-go
             by the :func:`attach_record` function.
         :param *args: anything to pass-through to the record func.
         :param **kwargs: anything to pass-through to the record func.
@@ -138,7 +142,7 @@ def basic_authenticate():
 
 def requires_auth(f):
     """ Ensures that any NSA official trying to gain access to
-        the backdoor is using a valid username and password.
+        the panel is using a valid username and password.
 
         This is a decorator, so it's fairly simple to use:
         @app.route("/")
@@ -172,7 +176,7 @@ def requires_warrant(f):
             # ...
 
         Don't try and wrap the warrant providing function, that'll
-        just end in a non-accessible backdoor panel.
+        just end in a non-accessible panel.
 
         :param f: the function to wrap
     """

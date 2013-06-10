@@ -7,7 +7,7 @@ def long_desc():
 
 kw = {
     "name": "Flask-NSA",
-    "version": "0.3.0",
+    "version": "0.3.1",
     "url": "https://github.com/plausibility/flask-nsa",
     "license": "MIT",
     "author": "plausibility",
