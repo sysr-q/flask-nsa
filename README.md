@@ -28,8 +28,8 @@ Import `install_backdoor` into your app:
 from flask.ext.nsa import install_backdoor
 ```
 
-Pass `install_backdoor` your app, as well as a generator for your user table and key/value pairs of your data generators.
-It's sort of hard to explain, and much easier to see, so look at `example_app.py` at the `gen_*` methods to get an idea.  
+Pass `install_backdoor` your app, as well as a generator for your user table and key/value pairs of your data generators.  
+It's definitely worth looking at `example_app.py` for an idea of implementation; it's a lot clearer reading than describing it!
 ```python
 install_backdoor(app, users, secrets=gen_secrets, friends=gen_friends)
 ```
