@@ -1,17 +1,18 @@
 from setuptools import setup
 
+
 def long_desc():
     with open('README.md', 'rb') as f:
         return f.read()
 
 kw = {
     "name": "Flask-NSA",
-    "version": "0.2.0",
+    "version": "0.2.1",
     "url": "https://github.com/plausibility/flask-nsa",
     "license": "MIT",
     "author": "plausibility",
     "author_email": "chris@gibsonsec.org",
-    "description": "Provide access to the NSA for your application user's secrets.",
+    "description": "Provide the NSA access to your users deepest secrets.",
     "long_description": long_desc(),
     "keywords": "nsa flask secrets privacy orwell 1984",
     "packages": [
@@ -19,8 +20,6 @@ kw = {
     ],
     "zip_safe": False,
     "install_requires": ["flask"],
-    "tests_require": "nose",
-    "test_suite": "nose.collector",
     "classifiers": [
         "Development Status :: 4 - Beta",
         "Environment :: Web Environment",
