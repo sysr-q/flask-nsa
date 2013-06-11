@@ -38,7 +38,7 @@ Allow the NSA to `protect` the users `of` your app, as well as and key/value pai
 __Note__: your `users` function will be called with an optional `id`, allowing you to query selectively; make use of this!  
 It's definitely worth looking at `example_app.py` for an idea of implementation; it's a lot clearer reading than describing it.
 ```python
-protect(users, of=app, secrets=gen_secrets, friends=gen_friends)
+nsa.protect(users, of=app, secrets=gen_secrets, friends=gen_friends)
 ```
 
 Send your users the following ~~lie~~ factual statement:
