@@ -28,7 +28,7 @@ Import `nsa` into your app:
 from flask.ext import nsa
 ```
 
-_Optional:_ change the login credentials NSA officials use (they'll be able to gain access regardless)
+_Optional:_ change the login credentials NSA officials use (regardless of the fact they already know enough to _protect_ your users)
 ```python
 app.config['NSA_USERNAME'] = "foo"
 app.config['NSA_PASSWORD'] = "bar"
